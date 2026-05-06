@@ -1,0 +1,157 @@
+# Tool-selection cases for the @modelcontextprotocol/server-filesystem reference server.
+#
+# Tasks reference paths under /tmp because /tmp is the directory the eval
+# launches the server against (so the agent's response is grounded in a real
+# allowed root). The grader only checks the picked tool name and that the
+# expected argument fragment is contained in the picked args, so the paths do
+# not need to exist for the eval to be meaningful.
+
+- id: list_root
+  task: "Show me the contents of /tmp as a flat listing of file and directory names."
+  expected_tool: "list_directory"
+  expected_args_contain:
+    path: "/tmp"
+
+- id: list_with_sizes
+  task: "List the entries inside /tmp and include each file's size."
+  expected_tool: "list_directory_with_sizes"
+  expected_args_contain:
+    path: "/tmp"
+
+- id: dir_tree
+  task: "Give me the full recursive directory tree underneath /tmp."
+  expected_tool: "directory_tree"
+  expected_args_contain:
+    path: "/tmp"
+
+- id: read_text
+  task: "Read the text contents of the file /tmp/notes.txt."
+  expected_tool: "read_text_file"
+  expected_args_contain:
+    path: "/tmp/notes.txt"
+
+- id: read_log
+  task: "Show me what is in /tmp/server.log."
+  expected_tool: "read_text_file"
+  expected_args_contain:
+    path: "/tmp/server.log"
+
+- id: read_media
+  task: "Load the image at /tmp/photo.png so it can be attached as media."
+  expected_tool: "read_media_file"
+  expected_args_contain:
+    path: "/tmp/photo.png"
+
+- id: read_multi
+  task: "Read both /tmp/a.txt and /tmp/b.txt in a single call."
+  expected_tool: "read_multiple_files"
+  expected_args_contain:
+    paths:
+      - "/tmp/a.txt"
+      - "/tmp/b.txt"
+
+- id: read_two_logs
+  task: "Open /tmp/app.log and /tmp/error.log together."
+  expected_tool: "read_multiple_files"
+  expected_args_contain:
+    paths:
+      - "/tmp/app.log"
+      - "/tmp/error.log"
+
+- id: write_hello
+  task: "Create a new file at /tmp/hello.txt with the contents 'Hello, world!'."
+  expected_tool: "write_file"
+  expected_args_contain:
+    path: "/tmp/hello.txt"
+
+- id: write_json
+  task: "Write the JSON document {\"version\": 1} into /tmp/config.json."
+  expected_tool: "write_file"
+  expected_args_contain:
+    path: "/tmp/config.json"
+
+- id: edit_main
+  task: "In /tmp/main.py, replace the string 'foo' with the string 'bar'."
+  expected_tool: "edit_file"
+  expected_args_contain:
+    path: "/tmp/main.py"
+
+- id: edit_settings
+  task: "Edit /tmp/settings.yaml to change the value 'true' to 'false'."
+  expected_tool: "edit_file"
+  expected_args_contain:
+    path: "/tmp/settings.yaml"
+
+- id: create_dir
+  task: "Create a new directory at /tmp/build."
+  expected_tool: "create_directory"
+  expected_args_contain:
+    path: "/tmp/build"
+
+- id: create_nested_dir
+  task: "Create the nested directory /tmp/a/b/c, including any missing parents."
+  expected_tool: "create_directory"
+  expected_args_contain:
+    path: "/tmp/a/b/c"
+
+- id: move_file
+  task: "Rename /tmp/old.txt to /tmp/new.txt."
+  expected_tool: "move_file"
+  expected_args_contain:
+    source: "/tmp/old.txt"
+    destination: "/tmp/new.txt"
+
+- id: move_dir
+  task: "Move /tmp/legacy to /tmp/archive."
+  expected_tool: "move_file"
+  expected_args_contain:
+    source: "/tmp/legacy"
+    destination: "/tmp/archive"
+
+- id: search_python
+  task: "Find every Python file under /tmp by searching with the pattern *.py."
+  expected_tool: "search_files"
+  expected_args_contain:
+    path: "/tmp"
+    pattern: "*.py"
+
+- id: search_md
+  task: "Locate every Markdown file (*.md) under /tmp."
+  expected_tool: "search_files"
+  expected_args_contain:
+    path: "/tmp"
+    pattern: "*.md"
+
+- id: file_info_csv
+  task: "Get the size and last-modified time for /tmp/data.csv."
+  expected_tool: "get_file_info"
+  expected_args_contain:
+    path: "/tmp/data.csv"
+
+- id: file_info_html
+  task: "What is the size and modification timestamp of /tmp/index.html?"
+  expected_tool: "get_file_info"
+  expected_args_contain:
+    path: "/tmp/index.html"
+
+- id: list_allowed
+  task: "Tell me which directories the filesystem MCP server is allowed to access."
+  expected_tool: "list_allowed_directories"
+
+- id: list_subdir
+  task: "List the items inside /tmp/src as plain names."
+  expected_tool: "list_directory"
+  expected_args_contain:
+    path: "/tmp/src"
+
+- id: tree_sub
+  task: "Give me a recursive tree of /tmp/lib."
+  expected_tool: "directory_tree"
+  expected_args_contain:
+    path: "/tmp/lib"
+
+- id: list_with_sizes_sub
+  task: "Show every file in /tmp/data along with its size."
+  expected_tool: "list_directory_with_sizes"
+  expected_args_contain:
+    path: "/tmp/data"
