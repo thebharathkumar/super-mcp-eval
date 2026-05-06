@@ -1,0 +1,65 @@
+[build-system]
+requires = ["hatchling>=1.21.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "mcp-eval"
+version = "0.1.0"
+description = "Evaluation harness for MCP (Model Context Protocol) servers and the agents that use them."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Bharath Kumar" }]
+keywords = ["mcp", "model-context-protocol", "evaluation", "anthropic", "claude"]
+
+dependencies = [
+    "anthropic>=0.40.0,<1.0.0",
+    "mcp>=1.2.0",
+    "jsonschema>=4.21.0",
+    "pydantic>=2.6.0",
+    "pyyaml>=6.0.1",
+    "duckdb>=0.10.0",
+    "streamlit>=1.31.0",
+    "opentelemetry-api>=1.23.0",
+    "opentelemetry-sdk>=1.23.0",
+    "scipy>=1.12.0",
+    "typer>=0.12.0",
+    "rich>=13.7.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+    "ruff>=0.4.0",
+    "black>=24.3.0",
+]
+
+[project.urls]
+Repository = "https://github.com/thebharathkumar/super-mcp-eval"
+
+[tool.hatch.build.targets.wheel]
+packages = ["mcp_eval"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "N", "SIM"]
+ignore = ["E501"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["B011"]
+
+[tool.black]
+line-length = 100
+target-version = ["py311"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+markers = [
+    "integration: end-to-end tests that spawn external processes (requires npx, anthropic key, etc.)",
+]
+addopts = "-ra"
