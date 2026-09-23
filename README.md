@@ -1,5 +1,12 @@
 # mcp-eval
 
+<!-- brag:start -->
+<p align="center">
+  <a href="https://github.com/thebharathkumar/super-mcp-eval/blob/HEAD/docs/brag/super-mcp-eval.mp4"><img src="https://raw.githubusercontent.com/thebharathkumar/super-mcp-eval/HEAD/docs/brag/super-mcp-eval.gif" alt="super-mcp-eval: 15-second technical brief" width="100%"></a>
+</p>
+<p align="center"><sub>15-second technical brief. <a href="https://github.com/thebharathkumar/super-mcp-eval/blob/HEAD/docs/brag/super-mcp-eval.mp4">Full MP4 with sound</a> &middot; more at <a href="https://thebharath.co">thebharath.co</a></sub></p>
+<!-- brag:end -->
+
 An evaluation harness for [Model Context Protocol](https://modelcontextprotocol.io) servers and the agents that use them.
 
 > **Status:** Phase 2 of 4 complete. Schema compliance, tool-selection accuracy with Wilson 95% CIs, DuckDB persistence, and a Streamlit dashboard all run end to end. Cross-model regression detection with McNemar's test (Phase 3) and the published benchmark scorecard are next.
